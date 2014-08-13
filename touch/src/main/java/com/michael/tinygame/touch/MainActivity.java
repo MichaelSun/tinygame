@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.ShareActionProvider;
 import cn.domob.android.ads.DomobAdView;
 import com.michael.tinygame.touch.Config.AppConfig;
 import com.michael.tinygame.touch.fragment.TouchFragment;
@@ -20,6 +22,8 @@ import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends Activity implements TouchFragment.OnFragmentInteractionListener {
 
+    private Intent mShareIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +32,16 @@ public class MainActivity extends Activity implements TouchFragment.OnFragmentIn
 
         setContentView(R.layout.main_activity);
 
+        mShareIntent = getDefaultIntent();
+
         initView("touch");
         initBannerAd();
+    }
+
+    private Intent getDefaultIntent() {
+        mShareIntent = new Intent(Intent.ACTION_SEND);
+        mShareIntent.setType("text/*");
+        return mShareIntent;
     }
 
     @Override
@@ -62,6 +74,18 @@ public class MainActivity extends Activity implements TouchFragment.OnFragmentIn
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        ShareActionProvider shareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
+        mShareIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.share_text),
+                                                                  SettingManager.getInstance().getTouchBestCount()));
+        shareActionProvider.setShareIntent(mShareIntent);
+        shareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener() {
+            @Override
+            public boolean onShareTargetSelected(ShareActionProvider shareActionProvider, Intent intent) {
+                return true;
+            }
+        });
+        shareActionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+
         return true;
     }
 

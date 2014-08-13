@@ -3,9 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.michael.tinygame.touch.MainActivity" >
 
+    <item
+        android:id="@+id/action_share"
+        android:title="分享"
+        app:showAsAction="always"
+        android:actionProviderClass="android.widget.ShareActionProvider"/>
+
     <item android:id="@+id/action_reopen"
-        android:title="@string/action_reopen"
-        android:icon="@drawable/actionbar_refresh"
-        app:showAsAction="ifRoom" />
+          android:title="@string/action_reopen"
+          android:icon="@drawable/actionbar_refresh"
+          app:showAsAction="ifRoom" />
+
+    <!--<item-->
+        <!--android:id="@+id/detail_action_more"-->
+        <!--android:title="更多"-->
+        <!--android:icon="@drawable/android_db_actionbar_more"-->
+        <!--app:showAsAction="always">-->
+        <!--<menu>-->
+            <!--<item android:id="@+id/action_reopen"-->
+                  <!--android:title="@string/action_reopen"-->
+                  <!--android:icon="@drawable/actionbar_refresh"-->
+                  <!--app:showAsAction="ifRoom" />-->
+        <!--</menu>-->
+    <!--</item>-->
 
 </menu>

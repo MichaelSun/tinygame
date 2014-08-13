@@ -7,5 +7,6 @@
     <string name="time_tv" formatted="false">%s 秒</string>
 
     <string name="action_reopen">重新开始</string>
+    <string name="share_text" formatted="false">手指都抽了，10秒%s次，敢来和我PK么~~~~</string>
 
 </resources>
