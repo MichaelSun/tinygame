@@ -76,7 +76,8 @@ public class MainActivity extends Activity implements TouchFragment.OnFragmentIn
         getMenuInflater().inflate(R.menu.main, menu);
         ShareActionProvider shareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
         mShareIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.share_text),
-                                                                  SettingManager.getInstance().getTouchBestCount()));
+                                                                  SettingManager.getInstance().getTouchBestCount(),
+                                                                  AppConfig.DOWNLOAD_URL));
         shareActionProvider.setShareIntent(mShareIntent);
         shareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener() {
             @Override
